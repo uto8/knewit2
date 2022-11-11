@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   enum user_type: { admin: 0, driver: 1, manager: 2, consignor_manager: 3, consignor_worker: 4 }
+
+  has_many :delivery_contents
 end
