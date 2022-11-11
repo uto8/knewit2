@@ -6,7 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# ドライバー作成
+
+#ドライバー作成
 5.times do |n|
   User.create!(
     name: "ドライバー#{n}",
@@ -23,11 +24,10 @@ end
     load_capacity: 2000 + n * 1000,
   )
 end
-
 # 配送データ作成
 5.times do |n|
-  DeliveryData.create!(
-    user: User.find_by(name: "ドライバー#{n}"),
+  DeliveryContent.create!(
+    user: User.find_by(email: "driver#{n}@gmail.com"),
     truck: Truck.find_by(truck_number: 1234 + n),
     delivery_date: 20220826,
     consignor: "豊田通商#{n}"
@@ -39,7 +39,7 @@ end
   DeliveryRoot.create!(
     departure_place: "weworkグローバルゲート",
     destination: "恵比寿ガーデンプレイス",
-    delivery_data: DeliveryData.find_by(consignor: "豊田通商#{n}")
+    delivery_content: DeliveryContent.find_by(consignor: "豊田通商#{n}")
   )
 end
 
@@ -48,7 +48,7 @@ end
   Load.create!(
     load_number: 1111 + n,
     material: "鉄",
-    laod_weight: 1000 + n * 1000,
-    delivery_data: DeliveryData.find_by(consignor: "豊田通商#{n}")
+    load_weight: 1000 + n * 1000,
+    delivery_content: DeliveryContent.find_by(consignor: "豊田通商#{n}")
   )
 end
