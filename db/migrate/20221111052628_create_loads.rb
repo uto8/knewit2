@@ -1,0 +1,12 @@
+class CreateLoads < ActiveRecord::Migration[5.2]
+  def change
+    create_table :loads do |t|
+      t.integer :load_number
+      t.string :material
+      t.integer :load_weight
+      t.references :delivery_data, foreign_key: true
+
+      t.timestamps
+    end
+  end
+end

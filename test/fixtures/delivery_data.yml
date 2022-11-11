@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  truck: one
+  delivery_date: 2022-11-11
+  consignor: MyString
+
+two:
+  user: two
+  truck: two
+  delivery_date: 2022-11-11
+  consignor: MyString

@@ -10,10 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_11_030256) do
+ActiveRecord::Schema.define(version: 2022_11_11_053008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "delivery_data", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "truck_id"
+    t.date "delivery_date"
+    t.string "consignor"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["truck_id"], name: "index_delivery_data_on_truck_id"
+    t.index ["user_id"], name: "index_delivery_data_on_user_id"
+  end
+
+  create_table "delivery_roots", force: :cascade do |t|
+    t.string "departure_place"
+    t.string "destination"
+    t.bigint "delivery_data_id"
+    t.integer "distance"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["delivery_data_id"], name: "index_delivery_roots_on_delivery_data_id"
+  end
+
+  create_table "loads", force: :cascade do |t|
+    t.integer "load_number"
+    t.string "material"
+    t.integer "load_weight"
+    t.bigint "delivery_data_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["delivery_data_id"], name: "index_loads_on_delivery_data_id"
+  end
+
+  create_table "trucks", force: :cascade do |t|
+    t.integer "truck_number"
+    t.integer "load_capacity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -29,4 +67,8 @@ ActiveRecord::Schema.define(version: 2022_11_11_030256) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "delivery_data", "trucks"
+  add_foreign_key "delivery_data", "users"
+  add_foreign_key "delivery_roots", "delivery_data", column: "delivery_data_id"
+  add_foreign_key "loads", "delivery_data", column: "delivery_data_id"
 end
