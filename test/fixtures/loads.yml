@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  load_number: 1
+  material: MyString
+  load_weight: 1
+  delivery_content: one
+
+two:
+  load_number: 1
+  material: MyString
+  load_weight: 1
+  delivery_content: two
