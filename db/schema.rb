@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(version: 2022_11_11_065302) do
   create_table "trucks", force: :cascade do |t|
     t.integer "truck_number"
     t.integer "load_capacity"
+    t.integer "carrier"
+    t.integer "car_size"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

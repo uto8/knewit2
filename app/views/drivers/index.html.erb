@@ -1,0 +1,22 @@
+<h2 class="mb-3">ドライバー情報</h2>
+<hr class="mb-4">
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">運転者台帳</th>
+      <th scope="col">作成番号</th>
+      <th scope="col">運転者氏名</th>
+      <th scope="col">生年月日</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @drivers.each do |driver| %>
+      <tr>
+        <th></th>
+        <td></td>
+        <td><%= driver.name %></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

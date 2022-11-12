@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
+<nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light mb-5">
   <a class="navbar-brand" href="#">Knewit</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -11,10 +11,10 @@
       </li>
       <% if user_signed_in? %>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-            Dropdown
+          <a v-on:mouseover="mouseOverAction" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+            一覧
           </a>
-          <div class="dropdown-menu">
+          <div v-if="hoverFlag" class="dropdown-menu">
             <a class="dropdown-item" href="#">Action</a>
             <a class="dropdown-item" href="#">Another action</a>
             <div class="dropdown-divider"></div>
@@ -23,6 +23,18 @@
         </li>
         <li class="nav-item">
           <%= link_to 'ログアウト', destroy_user_session_path, class: 'nav-link', method: :delete %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'ドライバー', drivers_index_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to '配送表', delivery_contents_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to '荷物情報', loads_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to '車両情報', trucks_path, class: 'nav-link' %>
         </li>
       <% else %>
         <li class="nav-item">
@@ -35,3 +47,20 @@
     </ul>
   </div>
 </nav>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+  var nav = new Vue({
+    el: '#nav',
+    data:{
+      hoverFlag: false,
+    },
+    methods: {
+      mouseOverAction(){
+        this.hoverFlag = true
+      },
+      mouseLeaveAction(){
+        this.hoverFlag = false
+      }
+    }
+  });
+</script>

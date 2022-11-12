@@ -22,6 +22,8 @@ end
   Truck.create!(
     truck_number: 1234 + n,
     load_capacity: 2000 + n * 1000,
+    car_size: n + 5,
+    carrier: 1
   )
 end
 # 配送データ作成
