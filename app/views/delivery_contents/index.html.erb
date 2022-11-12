@@ -1,5 +1,6 @@
 <h2 class="mb-3">配送表</h2>
-<%= search_form_for(@q, url: search_delivery_contents_path) do |f| %>
+<hr class="mb-4">
+<%= search_form_for(@q, url: delivery_contents_path) do |f| %>
   <div class="form-group row">
     <div class="col-3">
       <%= f.label "配送日" %>
@@ -52,31 +53,6 @@
           <td><%= delivery_content.delivery_date %></td>
           <td><%= delivery_content.user.name %></td>
           <td><%= delivery_content.truck.truck_number %></td>
-          <td>
-            <% delivery_content.delivery_roots.each do |delivery_root| %>
-              <%= delivery_root.departure_place %>
-            <% end %>
-          </td>
-          <td>
-            <% delivery_content.delivery_roots.each do |delivery_root| %>
-              <%= delivery_root.destination %>
-            <% end %>
-          </td>
-          <td>
-            <% delivery_content.loads.each do |load| %>
-              <%= load.load_number %>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  <% else %>
-    <tbody>
-      <% @delivery_contents.each do |delivery_content| %>
-        <tr>
-          <td><%= delivery_content.delivery_date %></td>
-          <td><%= delivery_content.user.name %></td>
-          <td><%= delivery_content.consignor %></td>
           <td>
             <% delivery_content.delivery_roots.each do |delivery_root| %>
               <%= delivery_root.departure_place %>
