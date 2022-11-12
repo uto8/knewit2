@@ -1,5 +1,12 @@
 class DeliveryContentsController < ApplicationController
+  before_action :search
+
+  def search
+    @q = DeliveryContent.ransack(params[:q])
+  end
+
   def index
-    @delivery_contents = DeliveryContent.all
+    @q = DeliveryContent.ransack(params[:q])
+    @delivery_contents_results = @q.result(distinct: true)
   end
 end

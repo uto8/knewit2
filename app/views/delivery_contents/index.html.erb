@@ -1,37 +1,99 @@
 <h2 class="mb-3">配送表</h2>
-<table class="table">
+<%= search_form_for(@q, url: search_delivery_contents_path) do |f| %>
+  <div class="form-group row">
+    <div class="col-3">
+      <%= f.label "配送日" %>
+    </div>
+    <div class="col-4">
+      <%= f.date_field :delivery_date_gteq, class:"form-control" %>
+    </div>
+    <div class="col-1">〜</div>
+    <div class="col-4">
+      <%= f.date_field :delivery_date_lteq, class:"form-control" %>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-3">
+      <%= f.label "ドライバー名" %>
+    </div>
+    <div class="col-9">
+      <%= f.text_field :user_name_eq, class:"form-control" %>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-3">
+      <%= f.label "車両" %>
+    </div>
+    <div class="col-9">
+      <%= f.text_field :truck_truck_number_eq, class:"form-control" %>
+    </div>
+  </div>
+  <br>
+  <%= f.submit '検索', class:"btn btn-primary shadow" %>
+<% end %>
+
+
+
+<table class="table mt-5">
   <thead class="thead-dark">
     <tr>
       <th scope="col">配送日</th>
       <th scope="col">ドライバー名</th>
-      <th scope="col">荷主</th>
+      <th scope="col">車両</th>
       <th scope="col">住所</th>
       <th scope="col">住所2</th>
       <th scope="col">荷物情報</th>
     </tr>
   </thead>
-  <tbody>
-    <% @delivery_contents.each do |delivery_content| %>
-      <tr>
-        <td><%= delivery_content.delivery_date %></td>
-        <td><%= delivery_content.user.name %></td>
-        <td><%= delivery_content.consignor %></td>
-        <td>
-          <% delivery_content.delivery_roots.each do |delivery_root| %>
-            <%= delivery_root.departure_place %>
-          <% end %>
-        </td>
-        <td>
-          <% delivery_content.delivery_roots.each do |delivery_root| %>
-            <%= delivery_root.destination %>
-          <% end %>
-        </td>
-        <td>
-          <% delivery_content.loads.each do |load| %>
-            <%= load.load_number %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
+  <% if @delivery_contents_results.present? %>
+    <tbody>
+      <% @delivery_contents_results.each do |delivery_content| %>
+        <tr>
+          <td><%= delivery_content.delivery_date %></td>
+          <td><%= delivery_content.user.name %></td>
+          <td><%= delivery_content.truck.truck_number %></td>
+          <td>
+            <% delivery_content.delivery_roots.each do |delivery_root| %>
+              <%= delivery_root.departure_place %>
+            <% end %>
+          </td>
+          <td>
+            <% delivery_content.delivery_roots.each do |delivery_root| %>
+              <%= delivery_root.destination %>
+            <% end %>
+          </td>
+          <td>
+            <% delivery_content.loads.each do |load| %>
+              <%= load.load_number %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% else %>
+    <tbody>
+      <% @delivery_contents.each do |delivery_content| %>
+        <tr>
+          <td><%= delivery_content.delivery_date %></td>
+          <td><%= delivery_content.user.name %></td>
+          <td><%= delivery_content.consignor %></td>
+          <td>
+            <% delivery_content.delivery_roots.each do |delivery_root| %>
+              <%= delivery_root.departure_place %>
+            <% end %>
+          </td>
+          <td>
+            <% delivery_content.delivery_roots.each do |delivery_root| %>
+              <%= delivery_root.destination %>
+            <% end %>
+          </td>
+          <td>
+            <% delivery_content.loads.each do |load| %>
+              <%= load.load_number %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% end %>
 </table>
