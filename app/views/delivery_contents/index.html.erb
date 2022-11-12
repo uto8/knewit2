@@ -1,0 +1,37 @@
+<h2 class="mb-3">配送表</h2>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">配送日</th>
+      <th scope="col">ドライバー名</th>
+      <th scope="col">荷主</th>
+      <th scope="col">住所</th>
+      <th scope="col">住所2</th>
+      <th scope="col">荷物情報</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @delivery_contents.each do |delivery_content| %>
+      <tr>
+        <td><%= delivery_content.delivery_date %></td>
+        <td><%= delivery_content.user.name %></td>
+        <td><%= delivery_content.consignor %></td>
+        <td>
+          <% delivery_content.delivery_roots.each do |delivery_root| %>
+            <%= delivery_root.departure_place %>
+          <% end %>
+        </td>
+        <td>
+          <% delivery_content.delivery_roots.each do |delivery_root| %>
+            <%= delivery_root.destination %>
+          <% end %>
+        </td>
+        <td>
+          <% delivery_content.loads.each do |load| %>
+            <%= load.load_number %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
