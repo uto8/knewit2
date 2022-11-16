@@ -41,10 +41,10 @@ ActiveRecord::Schema.define(version: 2022_11_11_065302) do
     t.integer "load_number"
     t.string "material"
     t.integer "load_weight"
-    t.bigint "delivery_content_id"
+    t.bigint "delivery_root_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["delivery_content_id"], name: "index_loads_on_delivery_content_id"
+    t.index ["delivery_root_id"], name: "index_loads_on_delivery_root_id"
   end
 
   create_table "trucks", force: :cascade do |t|
@@ -73,5 +73,5 @@ ActiveRecord::Schema.define(version: 2022_11_11_065302) do
   add_foreign_key "delivery_contents", "trucks"
   add_foreign_key "delivery_contents", "users"
   add_foreign_key "delivery_roots", "delivery_contents"
-  add_foreign_key "loads", "delivery_contents"
+  add_foreign_key "loads", "delivery_roots"
 end

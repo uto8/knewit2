@@ -30,7 +30,7 @@ end
 # 配送ルート作成
 5.times do |n|
   DeliveryRoot.create!(
-    departure_place: "weworkグローバルゲート",
+    departure_place: "weworkグローバルゲート#{n}",
     destination: "恵比寿ガーデンプレイス",
     delivery_content: DeliveryContent.find_by(consignor: "豊田通商#{n}"),
     distance: 3000 + n * 1000
@@ -43,6 +43,6 @@ end
     load_number: 1111 + n,
     material: "鉄",
     load_weight: 1000 + n * 1000,
-    delivery_content: DeliveryContent.find_by(consignor: "豊田通商#{n}")
+    delivery_root: DeliveryRoot.find_by(departure_place: "weworkグローバルゲート#{n}")
   )
 end

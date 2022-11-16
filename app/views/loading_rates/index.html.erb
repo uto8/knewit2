@@ -1,0 +1,69 @@
+<h2 class="mb-3">積載率</h2>
+<hr class="mb-4">
+<div class="row">
+  <div class="col-6">
+    <%= search_form_for(@q, url: actual_vehicle_rates_path) do |f| %>
+      <div class="form-group row">
+        <div class="col-3">
+          <%= f.label "配送日" %>
+        </div>
+        <div class="col-4">
+          <%= f.date_field :delivery_date_gteq, class:"form-control" %>
+        </div>
+        <div class="col-1">〜</div>
+        <div class="col-4">
+          <%= f.date_field :delivery_date_lteq, class:"form-control" %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-3">
+          <%= f.label "ドライバー名" %>
+        </div>
+        <div class="col-9">
+          <%= f.text_field :user_name_eq, class:"form-control" %>
+        </div>
+      </div>
+      <br>
+      <%= f.submit '検索', class:"btn btn-primary shadow" %>
+    <% end %>
+    <input type="hidden" id = "actualVehicleDistance" value=<%#= @actual_vehicle_distance %> >
+  <input type="hidden" id = "totalDistance" value=<%#= @total_distance %> >
+  </div>
+  <div class="col-6">
+    <canvas id="myChart"></canvas>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const actualVehicleDistance = document.getElementById('actualVehicleDistance').value
+const totalDistance = document.getElementById('totalDistance').value
+// alert(actual_vehicle_distance)
+var ctx = document.getElementById('myChart');
+var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: ['積載量', ''],
+        datasets: [{
+            label: '# of Votes',
+            data: [ actualVehicleDistance ,totalDistance - actualVehicleDistance],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+
