@@ -5,6 +5,7 @@ class CreateDeliveryRoots < ActiveRecord::Migration[5.2]
       t.string :destination
       t.references :delivery_content, foreign_key: true
       t.integer :distance
+      t.boolean :is_loaded, default: false, null: false
 
       t.timestamps
     end

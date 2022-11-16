@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2022_11_11_065302) do
     t.string "destination"
     t.bigint "delivery_content_id"
     t.integer "distance"
+    t.boolean "is_loaded", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["delivery_content_id"], name: "index_delivery_roots_on_delivery_content_id"
