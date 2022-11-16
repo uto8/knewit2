@@ -26,46 +26,31 @@
       <br>
       <%= f.submit '検索', class:"btn btn-primary shadow" %>
     <% end %>
-
     <table class="table mb-3 mt-5">
-      <tr>
-        <th>全走行距離</th>
-        <th>荷物を乗せて走った？</th>
-      </tr>
       <% if @delivery_contents_results.present? %>
-        <% @delivery_contents_results.each do |data| %>
-          <% data.delivery_roots.each do |root| %>
-            <tr>
-              <td><%= root.distance %>km</td>
-              <td><%= root.is_loaded %></td>
-            </tr>
-          <% end %>
-        <% end %>
-        <table class="table mb-3">
-          <tr>
-            <th>
-              全走行距離
-            </th>
-            <th>
-              貨物を積んで走行した距離
-            </th>
-            <th>
-              実車率
-            </th>
-          </tr>
-          <tr>
-            <td><%= @total_distance %></td>
-            <td><%= @actual_vehicle_distance %></td>
-            <td>
-              <%= actual_vehicle_rate(@total_distance.to_f, @actual_vehicle_distance.to_f) %>
-            </td>
-          </tr>
-        <table>
+        <tr>
+          <th>
+            全走行距離
+          </th>
+          <th>
+            貨物を積んで走行した距離
+          </th>
+          <th>
+            実車率
+          </th>
+        </tr>
+        <tr>
+          <td><%= @total_distance %></td>
+          <td><%= @actual_vehicle_distance %></td>
+          <td>
+            <%= actual_vehicle_rate(@total_distance.to_f, @actual_vehicle_distance.to_f) %>
+          </td>
+        </tr>
       <% end %>
     </table>
+    <input type="hidden" id = "actualVehicleDistance" value=<%= @actual_vehicle_distance %> >
+    <input type="hidden" id = "totalDistance" value=<%= @total_distance %> >
   </div>
-  <input type="hidden" id = "actualVehicleDistance" value=<%= @actual_vehicle_distance %> >
-  <input type="hidden" id = "totalDistance" value=<%= @total_distance %> >
   <div class="col-6">
     <canvas id="myChart"></canvas>
   </div>
