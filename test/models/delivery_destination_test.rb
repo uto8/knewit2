@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class DeliveryRootTest < ActiveSupport::TestCase
+class DeliveryDestinationTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

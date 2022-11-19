@@ -5,6 +5,9 @@ class CreateDeliveryContents < ActiveRecord::Migration[5.2]
       t.references :truck, foreign_key: true
       t.date :delivery_date
       t.string :consignor
+      t.string :departure_place
+      t.integer :distance
+      t.integer :loading_weight
 
       t.timestamps
     end
