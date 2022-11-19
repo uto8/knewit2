@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_11_065302) do
+ActiveRecord::Schema.define(version: 2022_11_19_024855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,27 +20,26 @@ ActiveRecord::Schema.define(version: 2022_11_11_065302) do
     t.bigint "truck_id"
     t.date "delivery_date"
     t.string "consignor"
+    t.string "departure_place"
+    t.integer "distance"
+    t.integer "loading_weight"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["truck_id"], name: "index_delivery_contents_on_truck_id"
     t.index ["user_id"], name: "index_delivery_contents_on_user_id"
   end
 
-  create_table "delivery_roots", force: :cascade do |t|
-    t.string "departure_place"
-    t.string "destination"
-    t.bigint "delivery_content_id"
-    t.integer "distance"
-    t.boolean "is_loaded", default: false, null: false
+  create_table "delivery_destinations", force: :cascade do |t|
+    t.string "delivery_destination_name"
+    t.string "delivery_destination_address"
+    t.string "commercial_distribution"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["delivery_content_id"], name: "index_delivery_roots_on_delivery_content_id"
   end
 
   create_table "loads", force: :cascade do |t|
     t.integer "load_number"
     t.string "material"
-    t.integer "load_weight"
     t.bigint "delivery_content_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -52,6 +51,7 @@ ActiveRecord::Schema.define(version: 2022_11_11_065302) do
     t.integer "load_capacity"
     t.integer "carrier"
     t.integer "car_size"
+    t.integer "car_weight"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -66,12 +66,12 @@ ActiveRecord::Schema.define(version: 2022_11_11_065302) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.integer "user_type"
+    t.string "driver_office"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "delivery_contents", "trucks"
   add_foreign_key "delivery_contents", "users"
-  add_foreign_key "delivery_roots", "delivery_contents"
   add_foreign_key "loads", "delivery_contents"
 end

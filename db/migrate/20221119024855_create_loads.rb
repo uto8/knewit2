@@ -3,7 +3,6 @@ class CreateLoads < ActiveRecord::Migration[5.2]
     create_table :loads do |t|
       t.integer :load_number
       t.string :material
-      t.integer :load_weight
       t.references :delivery_content, foreign_key: true
 
       t.timestamps

@@ -5,6 +5,7 @@ class CreateTrucks < ActiveRecord::Migration[5.2]
       t.integer :load_capacity
       t.integer :carrier
       t.integer :car_size
+      t.integer :car_weight
 
       t.timestamps
     end

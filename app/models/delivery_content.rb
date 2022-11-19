@@ -1,6 +1,6 @@
 class DeliveryContent < ApplicationRecord
   belongs_to :user
   belongs_to :truck
-  has_many :delivery_roots
+  belongs_to :delivery_destination
   has_many :loads
 end
