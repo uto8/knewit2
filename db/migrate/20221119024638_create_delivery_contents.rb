@@ -6,6 +6,7 @@ class CreateDeliveryContents < ActiveRecord::Migration[5.2]
       t.date :delivery_date
       t.string :consignor
       t.string :departure_place
+      t.references :delivery_destination, foreign_key: true
       t.integer :distance
       t.integer :loading_weight
 
