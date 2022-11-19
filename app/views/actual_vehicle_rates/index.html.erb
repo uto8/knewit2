@@ -33,14 +33,6 @@
         <th>荷物を乗せて走った？</th>
       </tr>
       <% if @delivery_contents_results.present? %>
-        <% @delivery_contents_results.each do |data| %>
-          <% data.delivery_roots.each do |root| %>
-            <tr>
-              <td><%= root.distance %>km</td>
-              <td><%= root.is_loaded %></td>
-            </tr>
-          <% end %>
-        <% end %>
         <table class="table mb-3">
           <tr>
             <th>
