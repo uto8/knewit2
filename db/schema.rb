@@ -21,10 +21,12 @@ ActiveRecord::Schema.define(version: 2022_11_19_024855) do
     t.date "delivery_date"
     t.string "consignor"
     t.string "departure_place"
+    t.bigint "delivery_destination_id"
     t.integer "distance"
     t.integer "loading_weight"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["delivery_destination_id"], name: "index_delivery_contents_on_delivery_destination_id"
     t.index ["truck_id"], name: "index_delivery_contents_on_truck_id"
     t.index ["user_id"], name: "index_delivery_contents_on_user_id"
   end
@@ -71,6 +73,7 @@ ActiveRecord::Schema.define(version: 2022_11_19_024855) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "delivery_contents", "delivery_destinations"
   add_foreign_key "delivery_contents", "trucks"
   add_foreign_key "delivery_contents", "users"
   add_foreign_key "loads", "delivery_contents"
