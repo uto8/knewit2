@@ -1,8 +1,8 @@
-<h2 class="mb-3">実車率</h2>
+<h2 class="mb-3">積載率</h2>
 <hr class="mb-4">
 <div id="app" class="row">
   <div class="col-6">
-    <%= search_form_for(@q, url: actual_vehicle_rates_path) do |f| %>
+    <%= search_form_for(@q, url: loading_rates_path) do |f| %>
       <div class="form-group row">
         <div class="col-3">
           <%= f.label "配送日" %>
@@ -17,10 +17,10 @@
       </div>
       <div class="form-group row">
         <div class="col-3">
-          <%= f.label "ドライバー名" %>
+          <%= f.label "車両" %>
         </div>
         <div class="col-9">
-          <%= f.text_field :user_name_eq, class:"form-control" %>
+          <%= f.text_field :truck_truck_number_eq, class:"form-control" %>
         </div>
       </div>
       <br>
@@ -38,39 +38,37 @@
               貨物を積んで走行した距離
             </th>
             <th>
-              実車率
+              積載率
             </th>
           </tr>
           <tr>
             <td><%= @total_distance %></td>
             <td><%= @actual_vehicle_distance %></td>
             <td>
-              <%= actual_vehicle_rate(@total_distance.to_f, @actual_vehicle_distance.to_f) %>
+              <%=@loading_rate %>%
             </td>
           </tr>
         <table>
       <% end %>
     </table>
   </div>
-  <input type="hidden" id = "actualVehicleDistance" value=<%= @actual_vehicle_distance %> >
-  <input type="hidden" id = "totalDistance" value=<%= @total_distance %> >
+  <input type="hidden" id = "loadingRate" value=<%= @loading_rate %> >
   <div class="col-6">
     <canvas id="myChart"></canvas>
   </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-const actualVehicleDistance = document.getElementById('actualVehicleDistance').value
-const totalDistance = document.getElementById('totalDistance').value
+const loadingRate = document.getElementById('loadingRate').value
 // alert(actual_vehicle_distance)
 var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {
     type: 'pie',
     data: {
-        labels: ['貨物を積んで走行した距離', '貨物を積まずに走行した距離'],
+        labels: ['積載率', ''],
         datasets: [{
             label: '# of Votes',
-            data: [ actualVehicleDistance ,totalDistance - actualVehicleDistance],
+            data: [ loadingRate ,100 - loadingRate],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
