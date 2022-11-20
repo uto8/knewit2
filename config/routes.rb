@@ -27,5 +27,15 @@ Rails.application.routes.draw do
       get 'search'
     end
   end
+  resources :mileages, only: [:index] do
+    collection do
+      get 'search'
+    end
+  end
+  resources :date_mileages, only: [:index] do
+    collection do
+      get 'search'
+    end
+  end
   get 'drivers/index', to: 'drivers#index'
 end
