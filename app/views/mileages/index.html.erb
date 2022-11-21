@@ -47,9 +47,9 @@ var mileages = JSON.parse(driverMileagesJson);
 const average = document.getElementById('average').value
 
 mileages.forEach(function(elem, index) {
-  if( (average - elem) / average > 30 ){
+  if( (average - elem) * 100 / average > 30 ){
     alert('走行距離について規定値を越えています。');
-  }else if( (elem - average) / average > 30 ){
+  }else if( (elem - average) * 100 / average > 30 ){
     alert('走行距離について規定値を越えています。');
   }
 });

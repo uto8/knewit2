@@ -45,9 +45,9 @@ const driverMileagesJson = $('#driverMileages').val();
 var mileages = JSON.parse(driverMileagesJson);
 
 mileages.forEach(function(elem, index) {
-  if((elem - mileages[index + 1])/ elem > 40){
+  if((elem - mileages[index + 1]) * 100 / elem > 40){
     alert('走行距離について規定値を越えています。');
-  }else if((mileages[index + 1] - elem) / elem > 40){
+  }else if((mileages[index + 1] - elem) * 100 / elem > 40){
     alert('走行距離について規定値を越えています。');
   }
 });
