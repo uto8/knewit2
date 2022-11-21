@@ -60,6 +60,9 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 const loadingRate = document.getElementById('loadingRate').value
+if( loadingRate < 60 ){
+  alert('積載率について規定値を越えています。');
+}
 // alert(actual_vehicle_distance)
 var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {

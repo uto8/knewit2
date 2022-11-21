@@ -28,6 +28,7 @@
     <% end %>
 
     <input type="hidden" id = "drivers" value=<%= @drivers %> >
+    <input type="hidden" id = "average" value=<%= @mileages_average %> >
     <input name="arr_json" type="hidden" value=<%= @driver_mileages %> id='driverMileages'/>
   </div>
   <div class="col-6">
@@ -43,6 +44,15 @@ const driversJson = $('#drivers').val();
 var drivers = JSON.parse(driversJson);
 const driverMileagesJson = $('#driverMileages').val();
 var mileages = JSON.parse(driverMileagesJson);
+const average = document.getElementById('average').value
+
+mileages.forEach(function(elem, index) {
+  if( (average - elem) / average > 30 ){
+    alert('走行距離について規定値を越えています。');
+  }else if( (elem - average) / average > 30 ){
+    alert('走行距離について規定値を越えています。');
+  }
+});
 console.log(drivers);
 var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {
