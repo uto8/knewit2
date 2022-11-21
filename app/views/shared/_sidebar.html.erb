@@ -1,0 +1,37 @@
+<nav class="navbar-dark pt-2 px-1">
+  <a class="navbar-brand mb-4" href="/">
+    <%= image_tag 'knewit-logo-hyousi.png', class:"w-100" %>
+  </a>
+  <ul class="navbar-nav m-auto">
+    <% if user_signed_in? %>
+      <li class="nav-item dropdown">
+        <a v-on:mouseover="mouseOverAction" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+          一覧
+        </a>
+        <div v-if="hoverFlag" class="dropdown-menu">
+          <%= link_to 'ドライバー', drivers_index_path, class: 'dropdown-item' %>
+          <%= link_to '配送表', delivery_contents_path, class: 'dropdown-item' %>
+          <%= link_to '荷物情報', loads_path, class: 'dropdown-item' %>
+          <%= link_to '車両情報', trucks_path, class: 'dropdown-item' %>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a v-on:mouseover="mouseOverAction" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+          ダッシュボード
+        </a>
+        <div v-if="hoverFlag" class="dropdown-menu">
+          <%= link_to '実車率', actual_vehicle_rates_path, class: 'dropdown-item' %>
+          <%= link_to '積載率', loading_rates_path, class: 'dropdown-item' %>
+          <%= link_to '走行距離', mileages_path, class: 'dropdown-item' %>
+        </div>
+      </li>
+    <% else %>
+      <li class="nav-item">
+        <%= link_to "サインイン", new_user_registration_path, class:"nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "ログイン", new_user_session_path, class:"nav-link" %>
+      </li>
+    <% end %>
+  </ul>
+</nav>
