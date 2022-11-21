@@ -11,10 +11,10 @@
 
   <body>
     <div class="row">
-      <div class="col-2" style="background-color:#1D2645; height:100vh" height="100%">
+      <div class="col-2" style="background-color:#1D2645; min-height:100vh">
         <%= render 'shared/sidebar' %>
       </div>
-      <div class="col-10 p-0">
+      <div class="col-10 p-0 pb-5">
         <%= render 'shared/navbar' %>
         <div class="pt-5 pl-5 pr-4">
           <%= yield %>
