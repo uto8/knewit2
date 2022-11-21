@@ -24,11 +24,7 @@ class MileagesController < ApplicationController
     @drivers = drivers.to_json.html_safe
     @driver_mileages = driver_mileages.to_json.html_safe
 
-    # 縦軸に使う走行距離を取得
-    # driver_mileage = []
-    # drivers.each do |driver|
-    #   driver_mileage.push()
-    #   @delivery_contents_results.
-    # end
+    #全ドライバーの平均走行距離を出力
+    @mileages_average = driver_mileages.sum / driver_mileages.length
   end
 end

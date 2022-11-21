@@ -43,6 +43,15 @@ const datesJson = $('#dates').val();
 var dates = JSON.parse(datesJson);
 const driverMileagesJson = $('#driverMileages').val();
 var mileages = JSON.parse(driverMileagesJson);
+
+mileages.forEach(function(elem, index) {
+  if((elem - mileages[index + 1]) * 100 / elem > 40){
+    alert('走行距離について規定値を越えています。');
+  }else if((mileages[index + 1] - elem) * 100 / elem > 40){
+    alert('走行距離について規定値を越えています。');
+  }
+});
+
 var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {
     type: 'bar',

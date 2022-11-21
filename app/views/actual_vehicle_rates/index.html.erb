@@ -62,6 +62,10 @@
 <script>
 const actualVehicleDistance = document.getElementById('actualVehicleDistance').value
 const totalDistance = document.getElementById('totalDistance').value
+const actualVehicleRate = actualVehicleDistance * 100 / totalDistance
+if( actualVehicleRate < 40 ){
+  alert("実車率について規定値を越えています。");
+}
 // alert(actual_vehicle_distance)
 var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {
