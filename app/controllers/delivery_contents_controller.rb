@@ -18,11 +18,16 @@ class DeliveryContentsController < ApplicationController
     end
   end
 
+  def import
+    DeliveryContent.import(params[:file])
+    redirect_to root_url, notice: "配送データをインポートしました。"
+  end
+
   private
 
   def send_posts_csv(deliveries)
     csv_data = CSV.generate do |csv|
-      column_names = %w(客先 運行車両 所属 車両(t) 納品回数 住所)
+      column_names = %w(客先 運行車両 所属 最大積載量(kg) 納品回数 住所)
       csv << column_names
       deliveries.each do |delivery|
         delivery_data = @delivery_contents_results.joins(:delivery_destination).where(delivery_destinations: {delivery_destination_name: delivery})
@@ -36,7 +41,7 @@ class DeliveryContentsController < ApplicationController
         end
         weights = []
         delivery_data.each do |data|
-          weights.push(data.truck.car_weight)
+          weights.push(data.truck.load_capacity)
         end
         column_values = [
           delivery,
