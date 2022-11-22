@@ -19,6 +19,7 @@ class DeliveryContentsController < ApplicationController
   end
 
   private
+
   def send_posts_csv(deliveries)
     csv_data = CSV.generate do |csv|
       column_names = %w(客先 運行車両 所属 車両(t) 納品回数 住所)
