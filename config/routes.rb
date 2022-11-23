@@ -16,10 +16,14 @@ Rails.application.routes.draw do
       get 'search'
     end
   end
-  resources :trucks, only: [:index] do
+  resources :trucks, only: [:index, :new] do
     collection do
       get 'search'
     end
+    collection { post :import }
+  end
+  resources :delivery_destinations, only: [:index, :new] do
+    collection { post :import }
   end
   resources :actual_vehicle_rates, only: [:index] do
     collection do

@@ -1,14 +1,9 @@
-<h2 class="mb-3">車両情報</h2>
+<div class="d-flex justify-content-between">
+  <h2 class="mb-3">トラック一覧</h2>
+  <%= link_to 'Excelをインポート', new_truck_path, class:"btn btn-success" %>
+</div>
 <hr class="mb-4">
 <%= search_form_for(@q, url: trucks_path) do |f| %>
-  <div class="form-group row">
-    <div class="col-3">
-      <%= f.label "車格" %>
-    </div>
-    <div class="col-9">
-      <%= f.text_field :car_size_eq, class:"form-control" %>
-    </div>
-  </div>
   <div class="form-group row">
     <div class="col-3">
       <%= f.label "荷台" %>
@@ -28,7 +23,6 @@
     <tr>
       <th scope="col">管理番号</th>
       <th scope="col">最大積載量</th>
-      <th scope="col">車格</th>
       <th scope="col">荷台</th>
     </tr>
   </thead>
@@ -39,7 +33,6 @@
           <td><%= truck.truck_number %></td>
           <td><%= truck.load_capacity %></td>
           <td><%= truck.carrier %></td>
-          <td><%= truck.car_size %></td>
         </tr>
       <% end %>
     </tbody>

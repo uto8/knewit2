@@ -10,6 +10,7 @@
         </a>
         <div v-if="hoverFlag" class="dropdown-menu">
           <%= link_to 'ドライバー', drivers_path, class: 'dropdown-item' %>
+          <%= link_to '納入先情報', delivery_destinations_path, class: 'dropdown-item' %>
           <%= link_to '配送表', delivery_contents_path, class: 'dropdown-item' %>
           <%= link_to '荷物情報', loads_path, class: 'dropdown-item' %>
           <%= link_to '車両情報', trucks_path, class: 'dropdown-item' %>

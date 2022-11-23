@@ -9,4 +9,9 @@ class TrucksController < ApplicationController
     @truck_results = @q.result(distinct: true)
     @trucks = Truck.all
   end
+
+  def import
+    Truck.import(params[:file])
+    redirect_to trucks_path, notice: "トラックをインポートしました。"
+  end
 end
