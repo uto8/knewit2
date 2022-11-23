@@ -35,6 +35,9 @@ ActiveRecord::Schema.define(version: 2022_11_19_024855) do
     t.string "delivery_destination_name"
     t.string "delivery_destination_address"
     t.string "commercial_distribution"
+    t.integer "post_code"
+    t.time "time_from"
+    t.time "time_to"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -52,10 +55,10 @@ ActiveRecord::Schema.define(version: 2022_11_19_024855) do
     t.integer "truck_number"
     t.integer "load_capacity"
     t.integer "carrier"
-    t.integer "car_size"
-    t.integer "car_weight"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_trucks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -69,6 +72,7 @@ ActiveRecord::Schema.define(version: 2022_11_19_024855) do
     t.string "name"
     t.integer "user_type"
     t.string "driver_office"
+    t.string "driver_license"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -77,4 +81,5 @@ ActiveRecord::Schema.define(version: 2022_11_19_024855) do
   add_foreign_key "delivery_contents", "trucks"
   add_foreign_key "delivery_contents", "users"
   add_foreign_key "loads", "delivery_contents"
+  add_foreign_key "trucks", "users"
 end

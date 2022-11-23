@@ -1,0 +1,26 @@
+
+<div class="d-flex justify-content-between mb-3">
+  <h2>納入先情報</h2>
+  <%= link_to 'Excelをインポート', new_delivery_destination_path, class:"btn btn-success" %>
+</div>
+<hr class="mb-4">
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">納入先名</th>
+      <th scope="col">郵便番号</th>
+      <th scope="col">住所</th>
+      <th scope="col">商流</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @delivery_destination.each do |destination| %>
+      <tr>
+        <th><%= destination.delivery_destination_name %></th>
+        <td><%= destination.post_code %></td>
+        <td><%= destination.delivery_destination_address %></td>
+        <td><%= destination.commercial_distribution %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

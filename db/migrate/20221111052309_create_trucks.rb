@@ -4,8 +4,7 @@ class CreateTrucks < ActiveRecord::Migration[5.2]
       t.integer :truck_number
       t.integer :load_capacity
       t.integer :carrier
-      t.integer :car_size
-      t.integer :car_weight
+      t.references :user, foreign_key: true
 
       t.timestamps
     end
