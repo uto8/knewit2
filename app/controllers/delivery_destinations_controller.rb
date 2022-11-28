@@ -1,6 +1,6 @@
 class DeliveryDestinationsController < ApplicationController
   def index
-    @delivery_destination = DeliveryDestination.all
+    @delivery_destination = DeliveryDestination.all.page(params[:page])
   end
 
   def new

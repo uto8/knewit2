@@ -5,8 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   enum user_type: { admin: 0, driver: 1, manager: 2, consignor_manager: 3, consignor_worker: 4 }
+  enum driver_license: { large: 0, middle: 1, unknown: 2 }
 
   has_many :delivery_contents
+
+  has_one :truck
 
   def self.import(file)
     # spreadsheet = open_spreadsheet(file)

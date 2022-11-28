@@ -6,7 +6,7 @@ class TrucksController < ApplicationController
   end
 
   def index
-    @truck_results = @q.result(distinct: true)
+    @truck_results = @q.result(distinct: true).page(params[:page])
     @trucks = Truck.all
   end
 
