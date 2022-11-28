@@ -25,6 +25,8 @@ class MileagesController < ApplicationController
     @driver_mileages = driver_mileages.to_json.html_safe
 
     #全ドライバーの平均走行距離を出力
-    @mileages_average = driver_mileages.sum / driver_mileages.length
+    if driver_mileages.length != 0
+      @mileages_average = driver_mileages.sum / driver_mileages.length
+    end
   end
 end
