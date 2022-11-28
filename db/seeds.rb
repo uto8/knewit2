@@ -1,4 +1,4 @@
-# # 各種類のユーザー作成
+# 各種類のユーザー作成
 User.create(
   name: "管理者",
   email: "admin@gmail.com",
@@ -124,17 +124,17 @@ Truck.create!(
   truck_office: "豊中倉庫/つばさ",
   user_id: User.find_by(name: "薄田").id
 )
-# Truck.create!(
-#   truck_number: 7287,
-#   load_capacity: 4000,
-#   carrier: 1,
-#   width: 2350,
-#   height: 400,
-#   length: 6150,
-#   is_stanchion: true,
-#   truck_office: "豊中倉庫/つばさ",
-#   user_id: User.find_by(name: "吉").id
-# )
+Truck.create!(
+  truck_number: 7287,
+  load_capacity: 4000,
+  carrier: 1,
+  width: 2350,
+  height: 400,
+  length: 6150,
+  is_stanchion: true,
+  truck_office: "豊中倉庫/つばさ",
+  user_id: User.find_by(name: "吉").id
+)
 Truck.create!(
   truck_number: 3076,
   load_capacity: 3300,
@@ -201,15 +201,3 @@ Truck.create!(
   truck_office: "豊中倉庫/名古屋",
   user_id: User.find_by(name: "磯部").id
 )
-# 配送データ作成
-80.times do |n|
-  DeliveryContent.create!(
-    user: User.find_by(name: "薄田"),
-    truck: Truck.find_by(truck_number: 4943),
-    delivery_date: 20220826,
-    consignor: "豊田通商#{n}",
-    delivery_destination: DeliveryDestination.find(1),
-    distance: 2000 + n * 1000,
-    loading_weight: 100 + n * 100
-  )
-end
