@@ -8,7 +8,7 @@ class DeliveryContentsController < ApplicationController
 
   def index
     @q = DeliveryContent.ransack(params[:q])
-    @delivery_contents_results = @q.result(distinct: true)
+    @delivery_contents_results = @q.result(distinct: true).page(params[:page])
     @csv_data = @delivery_contents_results.joins(:delivery_destination).group('delivery_destinations.delivery_destination_name').pluck('delivery_destinations.delivery_destination_name')
     respond_to do |format|
       format.html

@@ -15,6 +15,11 @@ class DeliveryDestination < ApplicationRecord
         post_code: records[13],
         time_from: records[21],
         time_to: records[22],
+        is_lift: records[31],
+        is_slinging: records[32],
+        is_chaburi: records[33],
+        description: records[41],
+        car_size: records[29],
       )
     end
   end

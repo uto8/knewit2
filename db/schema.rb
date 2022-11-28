@@ -38,6 +38,11 @@ ActiveRecord::Schema.define(version: 2022_11_19_024855) do
     t.integer "post_code"
     t.time "time_from"
     t.time "time_to"
+    t.boolean "is_lift"
+    t.boolean "is_slinging"
+    t.boolean "is_chaburi"
+    t.text "description"
+    t.integer "car_size"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -46,6 +51,10 @@ ActiveRecord::Schema.define(version: 2022_11_19_024855) do
     t.integer "load_number"
     t.string "material"
     t.bigint "delivery_content_id"
+    t.integer "loads_count"
+    t.integer "weight"
+    t.integer "total_weight"
+    t.string "packing"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["delivery_content_id"], name: "index_loads_on_delivery_content_id"
@@ -56,6 +65,12 @@ ActiveRecord::Schema.define(version: 2022_11_19_024855) do
     t.integer "load_capacity"
     t.integer "carrier"
     t.bigint "user_id"
+    t.integer "width"
+    t.integer "height"
+    t.integer "length"
+    t.boolean "is_stanchion"
+    t.string "truck_office"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_trucks_on_user_id"
@@ -72,7 +87,11 @@ ActiveRecord::Schema.define(version: 2022_11_19_024855) do
     t.string "name"
     t.integer "user_type"
     t.string "driver_office"
-    t.string "driver_license"
+    t.integer "driver_license"
+    t.boolean "is_slinging"
+    t.boolean "is_lift"
+    t.boolean "is_chaburi"
+    t.text "description"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

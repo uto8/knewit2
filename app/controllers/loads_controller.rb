@@ -6,7 +6,7 @@ class LoadsController < ApplicationController
   end
 
   def index
-    @load_results = @q.result(distinct: true)
+    @load_results = @q.result(distinct: true).page(params[:page])
     @loads = Load.all
   end
 end
