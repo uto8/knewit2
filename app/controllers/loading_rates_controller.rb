@@ -22,7 +22,9 @@ class LoadingRatesController < ApplicationController
     end
     average = array.sum
 
-    @loading_rate = average * 100 / (total_distance * @delivery_contents_results[0].truck.load_capacity)
+    if @delivery_contents_results[0].present?
+      @loading_rate = average * 100 / (total_distance * @delivery_contents_results[0].truck.load_capacity)
+    end
 
   end
 end
