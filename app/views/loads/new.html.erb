@@ -1,0 +1,6 @@
+<%= form_tag import_loads_path, multipart: true do %>
+  <div class="form-group">
+    <%= file_field_tag :file %>
+  </div>
+  <%= submit_tag "Import", class:"btn btn-success" %>
+<% end %>

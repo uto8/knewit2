@@ -48,16 +48,17 @@ ActiveRecord::Schema.define(version: 2022_11_19_024855) do
   end
 
   create_table "loads", force: :cascade do |t|
-    t.integer "load_number"
+    t.string "load_number"
     t.string "material"
-    t.bigint "delivery_content_id"
     t.integer "loads_count"
     t.integer "weight"
     t.integer "total_weight"
     t.string "packing"
+    t.date "date"
+    t.string "delivery_destination"
+    t.string "user"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["delivery_content_id"], name: "index_loads_on_delivery_content_id"
   end
 
   create_table "trucks", force: :cascade do |t|
@@ -99,6 +100,5 @@ ActiveRecord::Schema.define(version: 2022_11_19_024855) do
   add_foreign_key "delivery_contents", "delivery_destinations"
   add_foreign_key "delivery_contents", "trucks"
   add_foreign_key "delivery_contents", "users"
-  add_foreign_key "loads", "delivery_contents"
   add_foreign_key "trucks", "users"
 end

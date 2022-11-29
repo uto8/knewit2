@@ -11,10 +11,11 @@ Rails.application.routes.draw do
     end
     collection { post :import }
   end
-  resources :loads, only: [:index] do
+  resources :loads, only: [:index, :new] do
     collection do
       get 'search'
     end
+    collection { post :import }
   end
   resources :trucks, only: [:index, :new] do
     collection do

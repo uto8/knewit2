@@ -112,6 +112,17 @@ User.create!(
   is_lift: false,
   is_chaburi: false
 )
+User.create!(
+  name:"神田",
+  email: "kanda@gmail.com",
+  password: "password",
+  user_type: 1,
+  driver_office: "豊中倉庫/名古屋",
+  driver_license: 0,
+  is_slinging: true,
+  is_lift: false,
+  is_chaburi: false
+)
 
 Truck.create!(
   truck_number: 4943,
@@ -200,4 +211,15 @@ Truck.create!(
   is_stanchion: false,
   truck_office: "豊中倉庫/名古屋",
   user_id: User.find_by(name: "磯部").id
+)
+Truck.create!(
+  truck_number: 1111,
+  load_capacity: 3000,
+  carrier: 1,
+  width: 2160,
+  height: 370,
+  length: 4350,
+  is_stanchion: false,
+  truck_office: "豊中倉庫/名古屋",
+  user_id: User.find_by(name: "神田").id
 )
