@@ -44,8 +44,8 @@
     <tr>
       <th scope="col">配送日</th>
       <th scope="col">ドライバー名</th>
-      <th scope="col">車両</th>
-      <th scope="col">荷物情報</th>
+      <th scope="col">出発地</th>
+      <th scope="col">納入先</th>
     </tr>
   </thead>
   <% if @delivery_contents_results.present? %>
@@ -54,11 +54,9 @@
         <tr>
           <td><%= delivery_content.delivery_date %></td>
           <td><%= delivery_content.user.name %></td>
-          <td><%= delivery_content.truck.truck_number %></td>
+          <td><%= delivery_content.departure_place %></td>
           <td>
-            <% delivery_content.loads.each do |load| %>
-              <%= load.load_number %>
-            <% end %>
+            <%= delivery_content.delivery_destination.delivery_destination_name %>
           </td>
         </tr>
       <% end %>

@@ -49,8 +49,10 @@ const average = document.getElementById('average').value
 mileages.forEach(function(elem, index) {
   if( (average - elem) * 100 / average > 30 ){
     alert('走行距離について規定値を越えています。');
+    break
   }else if( (elem - average) * 100 / average > 30 ){
     alert('走行距離について規定値を越えています。');
+    // break
   }
 });
 console.log(drivers);

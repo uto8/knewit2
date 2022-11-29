@@ -1,4 +1,7 @@
-<h2 class="mb-3">荷物情報</h2>
+<div class="d-flex justify-content-between">
+  <h2 class="mb-3">荷物情報</h2>
+  <%= link_to 'Excelをインポート', new_load_path, class:"btn btn-success" %>
+</div>
 <hr class="mb-4">
 <%= search_form_for(@q, url: loads_path) do |f| %>
   <div class="form-group row">
@@ -6,11 +9,11 @@
       <%= f.label "配送日" %>
     </div>
     <div class="col-4">
-      <%= f.date_field :delivery_content_delivery_date_gteq, class:"form-control" %>
+      <%= f.date_field :date_gteq, class:"form-control" %>
     </div>
     <div class="col-1">〜</div>
     <div class="col-4">
-      <%= f.date_field :delivery_content_delivery_date_lteq, class:"form-control" %>
+      <%= f.date_field :date_lteq, class:"form-control" %>
     </div>
   </div>
   <div class="form-group row">
@@ -18,7 +21,7 @@
       <%= f.label "ドライバー" %>
     </div>
     <div class="col-9">
-      <%= f.text_field :delivery_content_user_name_eq, class:"form-control" %>
+      <%= f.text_field :user_eq, class:"form-control" %>
     </div>
   </div>
   <br>
@@ -31,16 +34,22 @@
       <th scope="col">伝票番号</th>
       <th scope="col">荷物名</th>
       <th scope="col">ドライバー</th>
+      <th scope="col">重量</th>
+      <th scope="col">数量</th>
+      <th scope="col">総重量</th>
     </tr>
   </thead>
   <% if @load_results.present? %>
     <tbody>
       <% @load_results.each do |load| %>
         <tr>
-          <th><%= load.delivery_content.delivery_date %></th>
+          <th><%= load.date %></th>
           <td><%= load.load_number %></td>
           <td><%= load.material %></td>
-          <td><%= load.delivery_content.user.name %></td>
+          <td><%= load.user %></td>
+          <td><%= load.weight %></td>
+          <td><%= load.loads_count %></td>
+          <td><%= load.total_weight %></td>
         </tr>
       <% end %>
     </tbody>
