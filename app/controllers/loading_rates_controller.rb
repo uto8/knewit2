@@ -26,5 +26,13 @@ class LoadingRatesController < ApplicationController
       @loading_rate = average * 100 / (total_distance * @delivery_contents_results[0].truck.load_capacity)
     end
 
+    puts `=========================`
+
+    puts `総距離=#{total_distance}`
+    puts `分子=#{average}`
+    puts `分母=#{total_distance * @delivery_contents_results[0].truck.load_capacity}`
+
+    puts `=========================`
+
   end
 end
