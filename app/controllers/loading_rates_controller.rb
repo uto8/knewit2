@@ -7,7 +7,7 @@ class LoadingRatesController < ApplicationController
 
   def index
     @q = DeliveryContent.ransack(params[:q])
-    @delivery_contents_results = @q.result(distinct: true)
+    @delivery_contents_results = @q.result
 
     distances = []
     @delivery_contents_results.each do |data|

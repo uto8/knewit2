@@ -10,6 +10,7 @@
       <th scope="col">運転者氏名</th>
       <th scope="col">事業所</th>
       <th scope="col">資格</th>
+      <th scope="col">車両</th>
       <th scope="col">リフト</th>
       <th scope="col">玉掛け</th>
       <th scope="col">ちゃぶり</th>
@@ -20,10 +21,11 @@
       <tr>
         <td><%= driver.name %></td>
         <td><%= driver.driver_office %></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td><%= license(driver.driver_license) %></td>
+        <td><%= Truck.joins(:user).find_by(users: {name: driver.name}).truck_number %></td>
+        <td><%= check(driver.is_lift) %></td>
+        <td><%= check(driver.is_slinging) %></td>
+        <td><%= check(driver.is_chaburi) %></td>
       </tr>
     <% end %>
   </tbody>

@@ -24,6 +24,7 @@
       <th scope="col">管理番号</th>
       <th scope="col">最大積載量</th>
       <th scope="col">荷台</th>
+      <th scope="col">担当ドライバー</th>
     </tr>
   </thead>
   <% if @truck_results.present? %>
@@ -32,7 +33,14 @@
         <tr>
           <td><%= truck.truck_number %></td>
           <td><%= truck.load_capacity %></td>
-          <td><%= truck.carrier %></td>
+          <td>
+            <% if truck.carrier == "body" %>
+              平ボディ
+            <% else %>
+            ウィング
+            <% end %>
+          </td>
+          <td><%= truck.user.name %></td>
         </tr>
       <% end %>
     </tbody>
