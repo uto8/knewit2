@@ -22,17 +22,18 @@ class LoadingRatesController < ApplicationController
     end
     average = array.sum
 
-    if @delivery_contents_results[0].present?
-      @loading_rate = average * 100 / (total_distance * @delivery_contents_results[0].truck.load_capacity)
+    tracks = []
+    @delivery_contents_results.each do |data|
+      tracks.push(data.truck.load_capacity)
     end
 
-    puts `=========================`
+    if tracks.length != 0
+      track_average = tracks.sum / tracks.length
+    end
 
-    puts `総距離=#{total_distance}`
-    puts `分子=#{average}`
-    puts `分母=#{total_distance * @delivery_contents_results[0].truck.load_capacity}`
-
-    puts `=========================`
+    if @delivery_contents_results[0].present?
+      @loading_rate = average * 100 / (total_distance * track_average)
+    end
 
   end
 end
