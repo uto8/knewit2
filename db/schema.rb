@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_19_024855) do
+ActiveRecord::Schema.define(version: 2022_12_05_052820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,22 @@ ActiveRecord::Schema.define(version: 2022_11_19_024855) do
     t.integer "car_size"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "dummies", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "truck_id"
+    t.date "delivery_date"
+    t.string "consignor"
+    t.string "departure_place"
+    t.bigint "delivery_destination_id"
+    t.integer "distance"
+    t.integer "loading_weight"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["delivery_destination_id"], name: "index_dummies_on_delivery_destination_id"
+    t.index ["truck_id"], name: "index_dummies_on_truck_id"
+    t.index ["user_id"], name: "index_dummies_on_user_id"
   end
 
   create_table "loads", force: :cascade do |t|
@@ -100,5 +116,8 @@ ActiveRecord::Schema.define(version: 2022_11_19_024855) do
   add_foreign_key "delivery_contents", "delivery_destinations"
   add_foreign_key "delivery_contents", "trucks"
   add_foreign_key "delivery_contents", "users"
+  add_foreign_key "dummies", "delivery_destinations"
+  add_foreign_key "dummies", "trucks"
+  add_foreign_key "dummies", "users"
   add_foreign_key "trucks", "users"
 end

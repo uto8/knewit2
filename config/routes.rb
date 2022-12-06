@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     end
     collection { post :import }
   end
+  resources :dummies, only: [:index, :new] do
+    collection { post :import }
+  end
   resources :loads, only: [:index, :new] do
     collection do
       get 'search'

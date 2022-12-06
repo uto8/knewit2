@@ -51,11 +51,17 @@
         <table>
       <% end %>
     </table>
+    <div class="text-center py-5">
+      <button id="btn" class="btn btn-primary">変更する</button>
+    </div>
   </div>
   <input type="hidden" id = "actualVehicleDistance" value=<%= @actual_vehicle_distance %> >
   <input type="hidden" id = "totalDistance" value=<%= @total_distance %> >
-  <div class="col-6">
+  <div id='click1' class="col-6 view">
     <canvas id="myChart"></canvas>
+  </div>
+  <div id="click2" class="col-6 inview">
+    <canvas id="myChart2" class="mt-3"></canvas>
   </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -65,7 +71,11 @@ const totalDistance = document.getElementById('totalDistance').value
 const actualVehicleRate = actualVehicleDistance * 100 / totalDistance
 if( actualVehicleRate < 40 ){
   alert("実車率について規定値を越えています。");
-}
+};
+$('#btn').on('click', function (){
+  $('#click1').toggleClass('view').toggleClass("inview");
+  $('#click2').toggleClass('view').toggleClass("inview");
+})
 // alert(actual_vehicle_distance)
 var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {
@@ -94,4 +104,32 @@ var myChart = new Chart(ctx, {
         }
     }
 });
+var ctx2 = document.getElementById('myChart2');
+var myChart2 = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+        labels: drivers,
+        datasets: [{
+            label: 'ドライバー',
+            data: mileages,
+            // data: [1,1,1,1,1,1,1,1],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
 </script>
+<style>
+  .view{
+    display:block;
+  }
+  .inview{
+    display:none;
+  }
+</style>

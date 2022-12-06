@@ -26,6 +26,9 @@
       <br>
       <%= f.submit '検索', class:"btn btn-primary shadow" %>
     <% end %>
+    <div class="text-center py-5">
+      <button id="btn" class="btn btn-primary">変更する</button>
+    </div>
 
     <table class="table mb-3 mt-5">
       <% if @delivery_contents_results.present? %>
@@ -53,7 +56,10 @@
     </table>
   </div>
   <input type="hidden" id = "loadingRate" value=<%= @loading_rate %> >
-  <div class="col-6">
+  <div id="click1" class="col-6 view">
+    <canvas id="myChart"></canvas>
+  </div>
+  <div id="click2" class="col-6 inview">
     <canvas id="myChart"></canvas>
   </div>
 </div>
@@ -63,6 +69,10 @@ const loadingRate = document.getElementById('loadingRate').value
 if( loadingRate < 60 ){
   alert('積載率について規定値を越えています。');
 }
+$('#btn').on('click', function (){
+  $('#click1').toggleClass('view').toggleClass("inview");
+  $('#click2').toggleClass('view').toggleClass("inview");
+})
 // alert(actual_vehicle_distance)
 var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {
@@ -91,4 +101,32 @@ var myChart = new Chart(ctx, {
         }
     }
 });
+var ctx2 = document.getElementById('myChart2');
+var myChart2 = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+        labels: drivers,
+        datasets: [{
+            label: 'ドライバー',
+            data: mileages,
+            // data: [1,1,1,1,1,1,1,1],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
 </script>
+<style>
+  .view{
+    display:block;
+  }
+  .inview{
+    display:none;
+  }
+</style>
