@@ -32,18 +32,30 @@
         <table class="table mb-3">
           <tr>
             <th>
-              全走行距離
-            </th>
-            <th>
-              貨物を積んで走行した距離
-            </th>
-            <th>
               積載率
+            </th>
+            <th>
+              平均
+            </th>
+            <th>
+              平均との差異
+            </th>
+            <th>
+              目標
+            </th>
+            <th>
+              目標との差異
             </th>
           </tr>
           <tr>
             <td><%= @total_distance %></td>
             <td><%= @actual_vehicle_distance %></td>
+            <td>
+              <%=@loading_rate %>%
+            </td>
+            <td>
+              <%=@loading_rate %>%
+            </td>
             <td>
               <%=@loading_rate %>%
             </td>
