@@ -32,21 +32,30 @@
         <table class="table mb-3">
           <tr>
             <th>
-              全走行距離
-            </th>
-            <th>
-              貨物を積んで走行した距離
-            </th>
-            <th>
               実車率
+            </th>
+            <th>
+              平均
+            </th>
+            <th>
+              平均との差異
+            </th>
+            <th>
+              目標
+            </th>
+            <th>
+              目標との差異
             </th>
           </tr>
           <tr>
-            <td><%= @total_distance %></td>
-            <td><%= @actual_vehicle_distance %></td>
             <td>
               <%= actual_vehicle_rate(@total_distance.to_f, @actual_vehicle_distance.to_f) %>
             </td>
+            <td>
+              <%#= @delivery_contents_results.average() %>
+            </td>
+            <td></td>
+            <td></td>
           </tr>
         <table>
       <% end %>
@@ -66,7 +75,12 @@ const actualVehicleRate = actualVehicleDistance * 100 / totalDistance
 if( actualVehicleRate < 40 ){
   alert("実車率について規定値を越えています。");
 }
-// alert(actual_vehicle_distance)
+goals = 40;
+if(actualVehicleRate > goals ){
+  backgroundColor = 'rgba(255, 99, 132, 0.2)';
+}else{
+  backgroundColor = 'white';
+}
 var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {
     type: 'pie',
@@ -76,7 +90,7 @@ var myChart = new Chart(ctx, {
             label: '# of Votes',
             data: [ actualVehicleDistance ,totalDistance - actualVehicleDistance],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
+                backgroundColor,
                 'rgba(54, 162, 235, 0.2)',
             ],
             borderColor: [
