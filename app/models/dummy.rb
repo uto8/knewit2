@@ -20,7 +20,7 @@ class Dummy < ApplicationRecord
         delivery_date: records[2],
         consignor: records[3],
         departure_place: records[4],
-        delivery_destination: Dummy.find_by(delivery_destination_name: records[5]),
+        delivery_destination: DeliveryDestination.find_by(delivery_destination_name: records[5]),
         distance: records[6],
         loading_weight: records[7]
       )

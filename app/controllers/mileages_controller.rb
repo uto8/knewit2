@@ -9,6 +9,8 @@ class MileagesController < ApplicationController
     @q = DeliveryContent.ransack(params[:q])
     @delivery_contents_results = @q.result
 
+    @delivery_contents = DeliveryContent.page(params[:page])
+
     # driver_results = @delivery_contents_results.group
 
     # 横軸に使うドライバーを取得

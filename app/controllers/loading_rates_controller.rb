@@ -9,6 +9,8 @@ class LoadingRatesController < ApplicationController
     @q = DeliveryContent.ransack(params[:q])
     @delivery_contents_results = @q.result
 
+    @delivery_contents = DeliveryContent.page(params[:page])
+
     distances = []
     @delivery_contents_results.each do |data|
       distances.push(data.distance)

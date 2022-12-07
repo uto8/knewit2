@@ -9,6 +9,7 @@ class ActualVehicleRatesController < ApplicationController
     @q = DeliveryContent.ransack(params[:q])
     @delivery_contents_results = @q.result
 
+    @delivery_contents = DeliveryContent.page(params[:page])
 
     array = []
     @delivery_contents_results.each do |data|
