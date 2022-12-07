@@ -68,33 +68,33 @@
     </table>
   </div>
   <input type="hidden" id = "loadingRate" value=<%= @loading_rate %> >
+  <input type="hidden" id = "dummyLoadingRate" value=<%= @dummyLoading_rate %> >
   <div id="click1" class="col-6 view">
     <canvas id="myChart"></canvas>
   </div>
   <div id="click2" class="col-6 inview">
-    <canvas id="myChart"></canvas>
+    <canvas id="myChart2"></canvas>
   </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 const loadingRate = document.getElementById('loadingRate').value
 if( loadingRate < 60 ){
   alert('積載率について規定値を越えています。');
 }
-<<<<<<< HEAD
+
 $('#btn').on('click', function (){
   $('#click1').toggleClass('view').toggleClass("inview");
   $('#click2').toggleClass('view').toggleClass("inview");
-})
-// alert(actual_vehicle_distance)
-=======
+});
+
 goals = 13
 if(loadingRate > goals ){
   backgroundColor = 'rgba(255, 99, 132, 0.2)';
 }else{
   backgroundColor = 'white';
 }
->>>>>>> origin/main
 var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {
     type: 'pie',
@@ -122,15 +122,24 @@ var myChart = new Chart(ctx, {
         }
     }
 });
-var ctx2 = document.getElementById('myChart2');
-var myChart2 = new Chart(ctx2, {
-    type: 'bar',
+const dummyLoadingRate = document.getElementById('dummyLoadingRate').value
+var ctx = document.getElementById('myChart2');
+var myChart2 = new Chart(ctx, {
+    type: 'pie',
     data: {
-        labels: drivers,
+        labels: ['積載率', ''],
         datasets: [{
-            label: 'ドライバー',
-            data: mileages,
-            // data: [1,1,1,1,1,1,1,1],
+            label: '# of Votes',
+            data: [100, 200],
+            // data: [ dummyLoadingRate ,100 - dummyLoadingRate],
+            backgroundColor: [
+                backgroundColor,
+                'rgba(54, 162, 235, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+            ],
             borderWidth: 1
         }]
     },
@@ -142,6 +151,7 @@ var myChart2 = new Chart(ctx2, {
         }
     }
 });
+
 </script>
 <style>
   .view{

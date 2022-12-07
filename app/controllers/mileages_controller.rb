@@ -29,26 +29,22 @@ class MileagesController < ApplicationController
     end
 
     #ダミーデータ
-    @qDummy = Dummy.ransack(params[:q])
-    @dummy_results = @qDummy.result
+    dummies = Dummy.all
 
-    # driver_results = @delivery_contents_results.group
-
-    # 横軸に使うドライバーを取得
-    driversDummy = []
-    driver_mileagesDummy = []
-    @dummy_results.each do |data|
-      if data.user.user_type == "driver" && !drivers.include?(data.user.name)
-        driversDummy.push(data.user.name)
-        driver_mileagesDummy.push(@dummy_results.joins(:user).where(users: {name: data.user.name}).sum(:distance))
+    dummy_drivers = []
+    dummy_driver_mileages = []
+    dummies.each do |dummy|
+      if dummy.user.user_type == 'driver' && !dummy_drivers.include?(dummy.user.name)
+        dummy_drivers.push(dummy.user.name)
+        dummy_driver_mileages.push(dummies.joins(:user).where(users: {name: dummy.user.name}).sum(:distance))
       end
     end
-    @drivers = driversDummy.to_json.html_safe
-    @driver_mileages = driver_mileagesDummy.to_json.html_safe
+    @dummy_drivers = dummy_drivers.to_json.html_safe
+    @dummy_driver_mileages = dummy_driver_mileages.to_json.html_safe
 
     #全ドライバーの平均走行距離を出力
-    if driver_mileagesDummy.length != 0
-      @mileages_average = driver_mileagesDummy.sum / driver_mileagesDummy.length
+    if dummy_driver_mileages.length != 0
+      @dummy_mileages_average = dummy_driver_mileages.sum / dummy_driver_mileages.length
     end
   end
 end

@@ -33,13 +33,17 @@
     <input type="hidden" id = "drivers" value=<%= @drivers %> >
     <input type="hidden" id = "average" value=<%= @mileages_average %> >
     <input name="arr_json" type="hidden" value=<%= @driver_mileages %> id='driverMileages'/>
+
+    <input type="hidden" id = "dummyDrivers" value=<%= @dummy_drivers %> >
+    <input type="hidden" id = "dummyAverage" value=<%= @dummy_mileages_average %> >
+    <input name="arr_json" type="hidden" value=<%= @dummy_driver_mileages %> id='dummyDriverMileages'/>
   </div>
   <div id="click1" class="col-6 view">
     <canvas id="myChart" class="mt-3"></canvas>
     <%= link_to '日付別', date_mileages_path , class:'btn btn-success'%>
   </div>
   <div id="click2" class="col-6 inview">
-    <%# <canvas id="myChart2" class="mt-3"></canvas> %>
+    <canvas id="myChart2" class="mt-3"></canvas>
     <%= link_to '日付別', date_mileages_path , class:'btn btn-success'%>
   </div>
 </div>
@@ -56,7 +60,7 @@ const average = document.getElementById('average').value
 $('#btn').on('click', function (){
   $('#click1').toggleClass('view').toggleClass("inview");
   $('#click2').toggleClass('view').toggleClass("inview");
-})
+});
 goals = [293, 290 ,445, 340 ,540, 600, 220, 240, 600]
 backgroundColors = []
 mileages.forEach(function(value, index){
@@ -67,15 +71,6 @@ mileages.forEach(function(value, index){
   }
 });
 
-// mileages.forEach(function(elem, index) {
-//   if( (average - elem) * 100 / average > 30 ){
-//     alert('走行距離について規定値を越えています。');
-//     break
-//   }else if( (elem - average) * 100 / average > 30 ){
-//     alert('走行距離について規定値を越えています。');
-//     // break
-//   }
-// });
 var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {
     type: 'bar',
@@ -109,14 +104,20 @@ var myChart = new Chart(ctx, {
     }
 });
 
+const dummyDriversJson = $('#dummyDrivers').val();
+var dummyDrivers = JSON.parse(dummyDriversJson);
+const dummyDriverMileagesJson = $('#dummyDriverMileages').val();
+var dummyMileages = JSON.parse(dummyDriverMileagesJson);
+const dummyAverage = document.getElementById('dummyAverage').value
+
 var ctx2 = document.getElementById('myChart2');
 var myChart2 = new Chart(ctx2, {
     type: 'bar',
     data: {
-        labels: drivers,
+        labels: dummyDrivers,
         datasets: [{
             label: 'ドライバー',
-            data: mileages,
+            data: dummyMileages,
             // data: [1,1,1,1,1,1,1,1],
             borderWidth: 1
         }]
