@@ -35,18 +35,30 @@
         <table class="table mb-3">
           <tr>
             <th>
-              全走行距離
-            </th>
-            <th>
-              貨物を積んで走行した距離
-            </th>
-            <th>
               積載率
+            </th>
+            <th>
+              平均
+            </th>
+            <th>
+              平均との差異
+            </th>
+            <th>
+              目標
+            </th>
+            <th>
+              目標との差異
             </th>
           </tr>
           <tr>
             <td><%= @total_distance %></td>
             <td><%= @actual_vehicle_distance %></td>
+            <td>
+              <%=@loading_rate %>%
+            </td>
+            <td>
+              <%=@loading_rate %>%
+            </td>
             <td>
               <%=@loading_rate %>%
             </td>
@@ -69,11 +81,20 @@ const loadingRate = document.getElementById('loadingRate').value
 if( loadingRate < 60 ){
   alert('積載率について規定値を越えています。');
 }
+<<<<<<< HEAD
 $('#btn').on('click', function (){
   $('#click1').toggleClass('view').toggleClass("inview");
   $('#click2').toggleClass('view').toggleClass("inview");
 })
 // alert(actual_vehicle_distance)
+=======
+goals = 13
+if(loadingRate > goals ){
+  backgroundColor = 'rgba(255, 99, 132, 0.2)';
+}else{
+  backgroundColor = 'white';
+}
+>>>>>>> origin/main
 var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {
     type: 'pie',
@@ -83,7 +104,7 @@ var myChart = new Chart(ctx, {
             label: '# of Votes',
             data: [ loadingRate ,100 - loadingRate],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
+                backgroundColor,
                 'rgba(54, 162, 235, 0.2)',
             ],
             borderColor: [

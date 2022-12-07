@@ -57,6 +57,15 @@ $('#btn').on('click', function (){
   $('#click1').toggleClass('view').toggleClass("inview");
   $('#click2').toggleClass('view').toggleClass("inview");
 })
+goals = [293, 290 ,445, 340 ,540, 600, 220, 240, 600]
+backgroundColors = []
+mileages.forEach(function(value, index){
+  if(value - goals[index] >= 0){
+    backgroundColors.push('rgba(255, 99, 132, 0.2)');
+  }else{
+    backgroundColors.push('white');
+  }
+});
 
 // mileages.forEach(function(elem, index) {
 //   if( (average - elem) * 100 / average > 30 ){
@@ -75,9 +84,21 @@ var myChart = new Chart(ctx, {
         datasets: [{
             label: 'ドライバー別',
             data: mileages,
-            // data: [1,1,1,1,1,1,1,1],
-            borderWidth: 1
-        }]
+            borderWidth: 1,
+            backgroundColor: backgroundColors,
+            borderColor: [
+                'rgba(255, 99, 132, 1)'
+            ],
+        },
+         {
+          label: '目標',
+          data: goals,
+          type: 'line',
+          backgroundColor: [
+                'blue'
+            ],
+        }
+        ]
     },
     options: {
         scales: {
