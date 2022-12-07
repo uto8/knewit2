@@ -9,6 +9,8 @@ class MileagesController < ApplicationController
     @q = DeliveryContent.ransack(params[:q])
     @delivery_contents_results = @q.result
 
+    @delivery_contents = DeliveryContent.page(params[:page])
+
     # driver_results = @delivery_contents_results.group
 
     # 横軸に使うドライバーを取得
@@ -26,6 +28,25 @@ class MileagesController < ApplicationController
     #全ドライバーの平均走行距離を出力
     if driver_mileages.length != 0
       @mileages_average = driver_mileages.sum / driver_mileages.length
+    end
+
+    #ダミーデータ
+    dummies = Dummy.all
+
+    dummy_drivers = []
+    dummy_driver_mileages = []
+    dummies.each do |dummy|
+      if dummy.user.user_type == 'driver' && !dummy_drivers.include?(dummy.user.name)
+        dummy_drivers.push(dummy.user.name)
+        dummy_driver_mileages.push(dummies.joins(:user).where(users: {name: dummy.user.name}).sum(:distance))
+      end
+    end
+    @dummy_drivers = dummy_drivers.to_json.html_safe
+    @dummy_driver_mileages = dummy_driver_mileages.to_json.html_safe
+
+    #全ドライバーの平均走行距離を出力
+    if dummy_driver_mileages.length != 0
+      @dummy_mileages_average = dummy_driver_mileages.sum / dummy_driver_mileages.length
     end
   end
 end

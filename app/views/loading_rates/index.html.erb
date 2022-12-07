@@ -65,16 +65,67 @@
     </table>
   </div>
   <input type="hidden" id = "loadingRate" value=<%= @loading_rate %> >
-  <div class="col-6">
+  <input type="hidden" id = "dummyLoadingRate" value=<%= @dummyLoading_rate %> >
+  <div id="click1" class="col-6 view">
     <canvas id="myChart"></canvas>
   </div>
+  <div id="click2" class="col-6 inview">
+    <canvas id="myChart2"></canvas>
+  </div>
 </div>
+<div class="text-center py-5">
+      <button id="btn" class="btn btn-primary">変更する</button>
+    </div>
+<table class="table mt-5">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">配送日</th>
+      <th scope="col">ドライバー名</th>
+      <th scope="col">出発地</th>
+      <th scope="col">納入先</th>
+    </tr>
+  </thead>
+    <tbody>
+      <% @delivery_contents.each do |delivery_content| %>
+        <tr>
+          <td><%= delivery_content.delivery_date %></td>
+          <td>
+            <div class="form-group">
+              <label for="exampleFormControlSelect1"><%= delivery_content.user.name %></label>
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option>薄田</option>
+                <option>吉</option>
+                <option>古川</option>
+                <option>伊藤</option>
+                <option>川崎</option>
+                <option>廣田</option>
+                <option>磯部</option>
+                <option>神田</option>
+              </select>
+            </div>
+          </td>
+          <td><%= delivery_content.departure_place %></td>
+          <td>
+            <%= delivery_content.delivery_destination.delivery_destination_name %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+</table>
+<%= paginate @delivery_contents, theme: 'twitter-bootstrap-4' %>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 const loadingRate = document.getElementById('loadingRate').value
 if( loadingRate < 60 ){
   alert('積載率について規定値を越えています。');
 }
+
+$('#btn').on('click', function (){
+  $('#click1').toggleClass('view').toggleClass("inview");
+  $('#click2').toggleClass('view').toggleClass("inview");
+});
+
 goals = 13
 if(loadingRate > goals ){
   backgroundColor = 'rgba(255, 99, 132, 0.2)';
@@ -108,4 +159,42 @@ var myChart = new Chart(ctx, {
         }
     }
 });
+const dummyLoadingRate = document.getElementById('dummyLoadingRate').value
+var ctx = document.getElementById('myChart2');
+var myChart2 = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: ['積載率', ''],
+        datasets: [{
+            label: '# of Votes',
+            data: [100, 200],
+            // data: [ dummyLoadingRate ,100 - dummyLoadingRate],
+            backgroundColor: [
+                backgroundColor,
+                'rgba(54, 162, 235, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
 </script>
+<style>
+  .view{
+    display:block;
+  }
+  .inview{
+    display:none;
+  }
+</style>
