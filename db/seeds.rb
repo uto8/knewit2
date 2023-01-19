@@ -223,3 +223,108 @@ Truck.create!(
   truck_office: "豊中倉庫/名古屋",
   user_id: User.find_by(name: "神田").id
 )
+
+Co2Emission.create!(
+  [
+    {
+      date: "2022/1/12",
+      division: "事業部A",
+      emission: "42"
+    },
+    {
+      date: "2022/1/12",
+      division: "事業部B",
+      emission: "51"
+    },
+    {
+      date: "2022/1/21",
+      division: "事業部A",
+      emission: "35"
+    },
+    {
+      date: "2022/1/21",
+      division: "事業部B",
+      emission: "78"
+    },
+    {
+      date: "2022/1/30",
+      division: "事業部A",
+      emission: "16"
+    },
+    {
+      date: "2022/1/30",
+      division: "事業部B",
+      emission: "67"
+    },
+    {
+      date: "2022/2/7",
+      division: "事業部A",
+      emission: "49"
+    },
+    {
+      date: "2022/2/7",
+      division: "事業部B",
+      emission: "81"
+    },
+    {
+      date: "2022/2/15",
+      division: "事業部A",
+      emission: "12"
+    },
+    {
+      date: "2022/2/15",
+      division: "事業部B",
+      emission: "35"
+    },
+    {
+      date: "2022/3/7",
+      division: "事業部A",
+      emission: "42"
+    },
+    {
+      date: "2022/3/7",
+      division: "事業部B",
+      emission: "51"
+    },
+    {
+      date: "2022/4/1",
+      division: "事業部A",
+      emission: "67"
+    },
+    {
+      date: "2022/4/1",
+      division: "事業部B",
+      emission: "102"
+    },
+    {
+      date: "2022/4/25",
+      division: "事業部A",
+      emission: "42"
+    },
+    {
+      date: "2022/4/25",
+      division: "事業部B",
+      emission: "51"
+    },
+    {
+      date: "2022/5/15",
+      division: "事業部A",
+      emission: "12"
+    },
+    {
+      date: "2022/5/15",
+      division: "事業部B",
+      emission: "35"
+    },
+    {
+      date: "2022/6/9",
+      division: "事業部A",
+      emission: "57"
+    },
+    {
+      date: "2022/6/9",
+      division: "事業部B",
+      emission: "78"
+    }
+  ]
+)
