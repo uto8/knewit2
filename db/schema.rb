@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_05_052820) do
+ActiveRecord::Schema.define(version: 2023_01_19_034609) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "co2_emissions", force: :cascade do |t|
+    t.date "date"
+    t.string "division"
+    t.integer "emission"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "delivery_contents", force: :cascade do |t|
     t.bigint "user_id"
