@@ -1,4 +1,16 @@
-<h2 class="mb-3">CO2排出量</h2>
+<div class="d-flex justify-content-between">
+  <h2 class="mb-3">CO2排出量</h2>
+  <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+    期間選択
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" type="button" id="year">年ごと</a>
+    <a class="dropdown-item" type="button" id="month">月ごと</a>
+    <a class="dropdown-item" type="button" id="day">日ごと</a>
+  </div>
+</div>
+</div>
 <hr class="mb-4">
 <div class="row">
   <div class="col-6">
@@ -28,7 +40,15 @@
     <% end %>
   </div>
   <div class="col-6">
-    <canvas id="myChart"></canvas>
+    <div class="chart year view">
+      <canvas id="myChart"></canvas>
+    </div>
+    <div class="chart month">
+      <canvas id="myChart2"></canvas>
+    </div>
+    <div class="chart day">
+      <canvas id="myChart3"></canvas>
+    </div>
   </div>
 </div>
 <input type="hidden" id = "months" value=<%= @months %> >
@@ -41,11 +61,31 @@
   var months = JSON.parse(monthsJson);
   var emissions = JSON.parse(emissionsJson);
   var ctx = document.getElementById('myChart');
-  console.log(emissions);
+  var ctx2 = document.getElementById('myChart2');
+  var ctx3 = document.getElementById('myChart3');
+
+  monthsLabel = ["2022/01", "2022/02", "2022/03", "2022/04", "2022/05", "2022/06"]
+  co2Emissions = [124, 231, 313, 245, 127, 174]
+
+  $('#year').on('click', function (){
+    $('.chart').removeClass('view');
+    $('.year').addClass('view');
+  });
+  $('#month').on('click', function (){
+    $('.chart').removeClass('view');
+    $('.month').addClass('view');
+  });
+  $('#day').on('click', function (){
+    $('.chart').removeClass('view');
+    $('.day').addClass('view');
+
+  });
+
+  // 年ごと
   var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-          labels: months,
+          labels: ["2017", "2018", "2019", "2020", "2021", "2022"],
           datasets: [{
               label: 'CO2排出量',
               data: [124, 231, 313, 245, 127, 174],
@@ -66,4 +106,64 @@
           }
       }
   });
+
+  // 月ごと
+  var myChart2 = new Chart(ctx2, {
+      type: 'bar',
+      data: {
+          labels: ["2022/01", "2022/02", "2022/03", "2022/04", "2022/05", "2022/06"],
+          datasets: [{
+              label: 'CO2排出量',
+              data: [194, 156, 113, 145, 98, 274],
+              backgroundColor: [
+                  'rgba(10, 202, 235, 0.2)',
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+
+  // 日ごと
+  var myChart3 = new Chart(ctx3, {
+      type: 'bar',
+      data: {
+          labels: ['2022/1/1', '2022/1/6', '2022/1/12', '2022/1/17', '2022/1/21', '2022/1/27'],
+          datasets: [{
+              label: 'CO2排出量',
+              data: [12, 31, 13, 46, 57, 24],
+              backgroundColor: [
+                  'rgba(10, 202, 235, 0.2)',
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
 </script>
+<style>
+.chart.view{
+  display: block;
+}
+.chart{
+  display: none;
+}
+</style>
