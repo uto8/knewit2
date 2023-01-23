@@ -1,0 +1,124 @@
+<div class="d-flex justify-content-between">
+  <h2 class="mb-3">従業員労働管理</h2>
+  <div class="d-flex">
+    <button class="btn btn-success">Excelをエクスポート</button>
+  </div>
+</div>
+<hr class="mb-4">
+<div class="d-flex mb-5">
+  <button id="companyBtn" class="mr-2 btn btn-outline-primary true">全社</button>
+  <button id="driverBtn" class="btn btn-outline-secondary">ドライバー別</button>
+</div>
+<div class="row">
+  <div class="col-6">
+    <div class="d-flex align-items-center">
+      <div class="dropdown mr-4 mb-4">
+        <button id="dateBtn" class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+          期間選択
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item true" type="button" id="month">月ごと</a>
+          <a class="dropdown-item" type="button" id="day">日ごと</a>
+        </div>
+      </div>
+    </div>
+    <div class="date view date-form form-group row">
+      <div class="col-3">
+        <label>日付指定</label>
+      </div>
+      <div class="col-4">
+        <input type="date" class="form-control">
+      </div>
+      <div class="col-1">〜</div>
+      <div class="col-4">
+        <input type="date" class="form-control">
+      </div>
+    </div>
+    <div class="month date-form form-group row">
+      <div class="col-3">
+        <label>月単位指定</label>
+      </div>
+      <div class="col-4">
+        <input type="month" class="form-control">
+      </div>
+      <div class="col-1">〜</div>
+      <div class="col-4">
+        <input type="month" class="form-control">
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="img companyDateImg view">
+      <%= image_tag 'companyDate.png', class:"w-100" %>
+    </div>
+    <div class="img companyMonthImg">
+      <%= image_tag 'companyMonth.png', class:"w-100" %>
+    </div>
+    <div class="img driverDateImg">
+      <%= image_tag 'driverDate.png', class:"w-100" %>
+    </div>
+    <div class="img driverMonthImg">
+      <%= image_tag 'driverMonth.png', class:"w-100" %>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+imgview = function() {
+  if($("#month").hasClass("true") && $("#companyBtn").hasClass("true")){
+    $(".img").removeClass("view");
+    $(".companyDateImg").addClass("view");
+  } else if ($("#month").hasClass("true") && $("#driverBtn").hasClass("true")) {
+    $(".img").removeClass("view");
+    $(".companyMonthImg").addClass("view");
+  } else if ($("#day").hasClass("true") && $("#companyBtn").hasClass("true")) {
+    $(".img").removeClass("view");
+    $(".driverDateImg").addClass("view");
+  } else if ($("#day").hasClass("true") && $("#driverBtn").hasClass("true")) {
+    $(".img").removeClass("view");
+    $(".driverMonthImg").addClass("view");
+  }
+}
+
+
+  $('#driverBtn').on('click', function (){
+    $('#driverBtn').toggleClass('btn-outline-secondary').toggleClass("btn-outline-primary").toggleClass("true");
+    $('#companyBtn').toggleClass('btn-outline-secondary').toggleClass("btn-outline-primary").toggleClass("true");
+    imgview();
+  });
+  $('#companyBtn').on('click', function (){
+    $('#driverBtn').toggleClass('btn-outline-secondary').toggleClass("btn-outline-primary").toggleClass("true");
+    $('#companyBtn').toggleClass('btn-outline-secondary').toggleClass("btn-outline-primary").toggleClass("true");
+    imgview();
+  });
+
+  $('#month').on('click', function (){
+    $('#month').toggleClass("true");
+    $('#day').toggleClass("true");
+    $('.date-form').removeClass('view');
+    $('.month').addClass('view');
+    imgview();
+  });
+  $('#day').on('click', function (){
+    $('#day').toggleClass("true");
+    $('#month').toggleClass("true");
+    $('.date-form').removeClass('view');
+    $('.date').addClass('view');
+    imgview();
+  });
+</script>
+<style>
+.date-form.view{
+  display: flex;
+}
+.date-form{
+  display: none;
+}
+.img{
+  display: none;
+}
+.img.view{
+  display: block;
+}
+</style>

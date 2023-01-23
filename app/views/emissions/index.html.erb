@@ -1,15 +1,8 @@
 <div class="d-flex justify-content-between">
   <h2 class="mb-3">CO2排出量</h2>
-  <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    期間選択
-  </button>
-  <div class="dropdown-menu">
-    <a class="dropdown-item" type="button" id="year">年ごと</a>
-    <a class="dropdown-item" type="button" id="month">月ごと</a>
-    <a class="dropdown-item" type="button" id="day">日ごと</a>
+  <div class="d-flex">
+    <button class="btn btn-success">Excelをエクスポート</button>
   </div>
-</div>
 </div>
 <hr class="mb-4">
 <div class="row">
@@ -40,13 +33,26 @@
     <% end %>
   </div>
   <div class="col-6">
+    <div class="dropdown mb-4">
+      <button id="dateBtn" class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+        期間選択
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" type="button" id="year">年ごと</a>
+        <a class="dropdown-item" type="button" id="month">月ごと</a>
+        <a class="dropdown-item" type="button" id="day">日ごと</a>
+      </div>
+    </div>
     <div class="chart year view">
+      <h5>年ごと</h5>
       <canvas id="myChart"></canvas>
     </div>
     <div class="chart month">
+      <h5>月ごと</h5>
       <canvas id="myChart2"></canvas>
     </div>
     <div class="chart day">
+      <h5>日ごと</h5>
       <canvas id="myChart3"></canvas>
     </div>
   </div>
